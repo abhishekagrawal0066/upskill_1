@@ -121,7 +121,7 @@
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Cards</div>
             </a>
-        </li>
+        </li> 
         <!-- User interface -->
         <!-- Extended components -->
 

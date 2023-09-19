@@ -19,7 +19,7 @@
                     
                  @endif
             </div>
-            <table class="table table-striped table-bordered" id="example">
+            <table class="table table-striped table-bordered" id="example" width="100%">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -27,7 +27,7 @@
                         <th>Companies Image</th>
                         <th>Create Date</th>
                         <td>Update Date</td>
-                        <th>Status</th>
+                        <th width="11%">Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -38,10 +38,15 @@
                       <tr>
                           <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{$no; }}</strong></td>
                           <td>{{ $row->companies_name }}</td>
-                          <td> <img src="{{ asset('storage/images/'.$row->image) }}" class="img-fluid img-thumbnail" width="80"></td>
+                          <td> <img src="{{ asset('storage/images/'.$row->image) }}" class="" width="100" height="50"></td>
                           <td>{{ $row->created_at }}</td>
                           <td>{{ $row->updated_at }}</td>
-                          <td><span class="badge bg-label-primary me-1">  </span></td>
+                          <td class="custom-control custom-switch" style="text-align: right">
+                            {{-- <input data-id="{{$row->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="0" {{ $row->status ? 'checked' : '' }}> --}}
+                            <input data-id="{{$row->id}}" type="checkbox" class="custom-control-input toggle-class" id="customSwitches{{$row->id}}" {{ $row->status ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="customSwitches{{$row->id}}">{{ $row->status == 1 ? "Active" : "Disable"}}</label>
+                         </td>
+
                           <td>
                               <div class="dropdown">
                                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -61,4 +66,24 @@
             </table>
         </div>
     </div>
+    <script>
+        $(function() {
+            $('.toggle-class').change(function() {
+                var status = $(this).prop('checked') == true ? 1 : 0; 
+                var user_id = $(this).data('id');
+                    $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: 'changeStatus',
+                    data: {'status': status, 'user_id': user_id},
+                    success: function(data){
+                    alert("Status Change Successfully");
+                    // $("#msg").html("Status Change Successfully");
+                    // $("#msg").fadeOut(2000);
+                    console.log(data.success)
+                    }
+                });
+            })
+        })
+    </script>
 @endsection

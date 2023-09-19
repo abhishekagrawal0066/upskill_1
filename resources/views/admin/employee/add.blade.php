@@ -51,7 +51,7 @@
                                         <option value="1">Active</option>
                                         <option value="0">Disabled</option>
                                     </select>
-                                    @error('company_name')
+                                    @error('status')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>

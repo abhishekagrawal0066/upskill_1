@@ -43,6 +43,18 @@
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                                 </div>
+                                <br>
+                                <div>
+                                    <label for="defaultFormControlInput" class="form-label">Status</label>
+                                    <select name="status" id="defaultFormControlInput" class="form-select">
+                                        <option value="">Select Status</option>
+                                        <option value="1" {{ $employee[0]->status == 1 ? 'selected="selected"' : '' }}>Active</option>
+                                        <option value="0" {{ $employee[0]->status == 0 ? 'selected="selected"' : '' }}>Disabled</option>
+                                    </select>
+                                    @error('status')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             <div>
                                 <button class="btn btn-dark mt-3" type="submit" name="submit">Submit</button>

@@ -24,10 +24,10 @@
                     <tr>
                         <th>No</th>
                         <th>Companies Name</th>
-                        <th>Companies Image</th>
+                        <th>Employee Name</th>
                         <th>Create Date</th>
                         <td>Update Date</td>
-                        <th>Status</th>
+                        <th width="11%">Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -41,7 +41,10 @@
                           <td>{{ $row->employee_name }}</td>
                           <td>{{ $row->created_at }}</td>
                           <td>{{ $row->updated_at }}</td>
-                          <td><span class="badge bg-label-primary me-1">  </span></td>
+                          <td class="custom-control custom-switch" style="text-align: right">
+                            <input data-id="{{$row->id}}" type="checkbox" class="custom-control-input toggle-class" id="customSwitches{{$row->id}}" {{ $row->status ? 'checked' : '' }}>
+                            <label class="custom-control-label" for="customSwitches{{$row->id}}">{{ $row->status == 1 ? "Active" : "Disable"}}</label>
+                          </td>
                           <td>
                               <div class="dropdown">
                                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -61,4 +64,24 @@
             </table>
         </div>
     </div>
+    <script>
+        $(function() {
+            $('.toggle-class').change(function() {
+                var status = $(this).prop('checked') == true ? 1 : 0; 
+                var user_id = $(this).data('id');
+                    $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: 'changeStatuse',
+                    data: {'status': status, 'user_id': user_id},
+                    success: function(data){
+                    alert("Status Change Successfully");
+                    // $("#msg").html("Status Change Successfully");
+                    // $("#msg").fadeOut(2000);
+                    console.log(data.success)
+                    }
+                });
+            })
+        })
+    </script>
 @endsection

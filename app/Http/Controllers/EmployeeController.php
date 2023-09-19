@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Models\Companies;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -34,6 +35,7 @@ class EmployeeController extends Controller
         $validatedData = $request->validate([
             'company_name' => 'required',
             'employee_name' => 'required',
+            'status' => 'required',
         ]);
         $empl = Employee::create($validatedData);
         return back()->with('success', 'Employee created successfully.');
@@ -67,6 +69,7 @@ class EmployeeController extends Controller
         $validatedData = $request->validate([
             'company_name' => 'required',
             'employee_name' => 'required',
+            'status' => 'required',
         ]);
         $id->update($validatedData);
         return redirect()->route('employee.list')->with('success','Employee updated successfully');
@@ -79,5 +82,22 @@ class EmployeeController extends Controller
     {
         $id->delete();
         return redirect()->route('employee.list')->with('success','Employee deleted successfully');
+    }
+    public function changeStatuse(Request $request)
+    {
+        $Employee = Employee::find($request->user_id);
+        // $Companies_id['status'] = $request->status;
+        // // $id->update($Companies_status);
+        // $Companies_id->update($Companies_id);
+        $Employee->status = $request->status;
+        $Employee->save();
+
+        return response()->json(['success'=>'Status change successfully.']);
+    }
+    public function countemps(Employee $id)
+    {
+        $count = DB::table('companies')->count();
+        $countemp = DB::table('employee')->count();
+        return view('admin.dashboard',compact('countemp','count'));
     }
 }

@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AdminProfileControllar;
+// use App\Http\Controllers\AdminAuth\LogoutController;
 
 
 /*
@@ -60,6 +62,8 @@ Route::post('admin/companies/add', [CompaniesController::class, 'store']);
 Route::any('admin/companies/edit/{id}',[CompaniesController::class, 'edit'])->name('companies.edit');
 Route::any('admin/companies/update/{id}',[CompaniesController::class, 'update'])->name('companies.update');
 Route::any('admin/companies/destroy/{id}',[CompaniesController::class, 'destroy'])->name('companies.destroy');
+Route::get('admin/companies/changeStatus',[CompaniesController::class, 'changeStatus']);
+
 //employee
 Route::get('admin/employee/list',[EmployeeController::class, 'index'])->name('employee.list');
 Route::get('admin/employee/add',[EmployeeController::class, 'create'])->name('employee.add');
@@ -67,5 +71,13 @@ Route::post('admin/employee/add',[EmployeeController::class, 'store']);
 Route::any('admin/employee/destroy/{id}',[EmployeeController::class, 'destroy'])->name('employee.destroy');
 Route::any('admin/employee/edit/{id}',[EmployeeController::class, 'edit'])->name('employee.edit');
 Route::any('admin/employee/update/{id}',[EmployeeController::class, 'update'])->name('employee.update');
+Route::get('admin/employee/changeStatuse',[EmployeeController::class, 'changeStatuse']);
+///logout Admin
+// Route::get('admin/logout',[LogoutController::class, 'perform'])->name('logout.perform');
+Route::get('admin/logout', '\App\Http\Controllers\AdminAuth\LogoutController@perform')->name('logout.perform');
 
+Route::get('admin/profile', [AdminProfileControllar::class, 'edit'])->name('admin.profile.edit');
+Route::patch('admin/profile', [AdminProfileControllar::class, 'update'])->name('admin.profile.update');
+
+Route::get('admin/dashboard', [EmployeeController::class, 'countemps']);
 

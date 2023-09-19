@@ -82,6 +82,9 @@
                 </li>
             </ul>
         </li>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Employees</span>
+        </li>
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
@@ -95,7 +98,23 @@
                 </li>
             </ul>
         </li>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Profile</span>
+        </li>
         <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                <div data-i18n="Authentications">Profile</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ route('admin.profile.edit') }}" class="menu-link">
+                        <div data-i18n="Basic">Profile Update</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        {{-- <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
                 <div data-i18n="Misc">Misc</div>
@@ -112,23 +131,23 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
         <!-- Components -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
+        {{-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li> --}}
         <!-- Cards -->
-        <li class="menu-item">
+        {{-- <li class="menu-item">
             <a href="cards-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Cards</div>
             </a>
-        </li> 
+        </li>  --}}
         <!-- User interface -->
         <!-- Extended components -->
 
         <!-- Forms & Tables -->
        
         <li class="menu-item">
-            <a href="{{ route('logout') }}" class="menu-link">Logout</a>
+            <a href="{{ route('logout.perform') }}" class="menu-link">Logout</a>
             {{-- <form method="POST" action="">
              @csrf
                 <button type="button" class="btn btn-primary">Logout</button>

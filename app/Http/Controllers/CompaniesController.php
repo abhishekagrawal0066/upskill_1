@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Companies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class CompaniesController extends Controller
 {
@@ -120,5 +121,16 @@ class CompaniesController extends Controller
         Storage::delete('public/images/' . $id->image);
         $id->delete();
         return redirect()->route('companies.list')->with('success','Company deleted successfully');
+    }
+    public function changeStatus(Request $request)
+    {
+        $Companies = Companies::find($request->user_id);
+        // $Companies_id['status'] = $request->status;
+        // // $id->update($Companies_status);
+        // $Companies_id->update($Companies_id);
+        $Companies->status = $request->status;
+        $Companies->save();
+
+        return response()->json(['success'=>'Status change successfully.']);
     }
 }

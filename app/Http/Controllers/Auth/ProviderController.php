@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use Hash;
+use Str;
 use Illuminate\Support\Facades\Auth;
 
 class ProviderController extends Controller
@@ -16,9 +18,7 @@ class ProviderController extends Controller
     public function callback($provider)
     {
         try{
-            dd("dsd");
             $SocialUser = Socialite::driver($provider)->user();
-            dd($SocialUser->getNickname());
             $nickname = $SocialUser->getNickname();
             if ($SocialUser->getName() == '') {
                 $SocialUser->name = $nickname;
@@ -35,6 +35,7 @@ class ProviderController extends Controller
                 $user = user::create([
                     'name' => $SocialUser->getName(),
                     'email' => $SocialUser->getEmail(),
+                    'password' => Hash::make(Str::random(16)),
                     'username' => User::generateUserName($SocialUser->getNickname()),
                     'provider' => $provider,
                     'provider_id' => $SocialUser->getId(),
@@ -42,15 +43,6 @@ class ProviderController extends Controller
                     'email_verified_at' => now()
                 ]);
             }
-                // $user = User::updateOrCreate([
-                //     'provider_id'=>$SocialUser->id,
-                //     'provider' => $provider
-                // ],[
-                //     'name' => $SocialUser->name,
-                //     'username' => User::generateUserName($SocialUser->nickname),
-                //     'email' => $SocialUser->email,
-                //     'provider_token' => $SocialUser->token,
-                // ]);
             Auth::login($user);
             return redirect()->route('/dashboard');
         } catch (\Exception $e){

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AdminProfileControllar;
+use App\Http\Controllers\UserController;
 // use App\Http\Controllers\AdminAuth\LogoutController;
 
 
@@ -80,4 +81,7 @@ Route::get('admin/profile', [AdminProfileControllar::class, 'edit'])->name('admi
 Route::patch('admin/profile', [AdminProfileControllar::class, 'update'])->name('admin.profile.update');
 
 Route::get('admin/dashboard', [EmployeeController::class, 'countemps']);
+
+Route::get('admin/user/list',[UserController::class, 'index'])->name('employee.list');
+
 

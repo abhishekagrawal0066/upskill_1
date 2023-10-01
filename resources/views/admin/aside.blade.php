@@ -99,6 +99,22 @@
             </ul>
         </li>
         <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">User List</span>
+        </li>
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                <div data-i18n="Authentications">User</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ url('admin/user/list') }}" class="menu-link">
+                        <div data-i18n="Basic">User List</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Profile</span>
         </li>
         <li class="menu-item">

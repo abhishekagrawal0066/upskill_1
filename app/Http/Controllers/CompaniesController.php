@@ -133,4 +133,10 @@ class CompaniesController extends Controller
 
         return response()->json(['success'=>'Status change successfully.']);
     }
+    public function userSite()
+    {
+        $Companies = Companies::all();
+        $count = DB::table('companies')->count();
+        return view('job_listing', compact('Companies','count'));
+    }
 }

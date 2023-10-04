@@ -6,6 +6,7 @@ use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AdminProfileControllar;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\JobCategoryController;
 // use App\Http\Controllers\AdminAuth\LogoutController;
 
 
@@ -20,10 +21,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', function () {return view('welcome');
+})->name('home');
+Route::get('/job_listing', function () {return view('job_listing');
+})->name('job_listing');
 // //google login
 // Route::get('login/google', [App\Http\Controllers\Auth\ProviderController::class, 'redirectToGoogle'])->name('login.google');
 // Route::get('login/google/callback',  [App\Http\Controllers\Auth\ProviderController::class, 'handleGoogleCallback']);
@@ -56,6 +57,16 @@ Route::get('/admin/dashboard', function () {
 })->middleware(['auth:admin', 'verified'])->name('admin.dashboard');
 
 require __DIR__.'/adminauth.php';
+
+//job
+Route::get('admin/job/list', [JobCategoryController::class, 'index'])->name('job.list');
+Route::get('admin/job/add', [JobCategoryController::class, 'create'])->name('job.add');
+Route::post('admin/job/add', [JobCategoryController::class, 'store']);
+Route::any('admin/job/edit/{id}',[JobCategoryController::class, 'edit'])->name('job.edit');
+Route::any('admin/job/update/{id}',[JobCategoryController::class, 'update'])->name('job.update');
+Route::any('admin/job/destroy/{id}',[JobCategoryController::class, 'destroy'])->name('job.destroy');
+Route::get('admin/job/changeStatus',[JobCategoryController::class, 'changeStatus']);
+
 //companies
 Route::get('admin/companies/list', [CompaniesController::class, 'index'])->name('companies.list');
 Route::get('admin/companies/add', [CompaniesController::class, 'create'])->name('companies.add');
@@ -64,6 +75,10 @@ Route::any('admin/companies/edit/{id}',[CompaniesController::class, 'edit'])->na
 Route::any('admin/companies/update/{id}',[CompaniesController::class, 'update'])->name('companies.update');
 Route::any('admin/companies/destroy/{id}',[CompaniesController::class, 'destroy'])->name('companies.destroy');
 Route::get('admin/companies/changeStatus',[CompaniesController::class, 'changeStatus']);
+
+//User Site
+
+Route::get('job_listing',[CompaniesController::class, 'userSite']);
 
 //employee
 Route::get('admin/employee/list',[EmployeeController::class, 'index'])->name('employee.list');

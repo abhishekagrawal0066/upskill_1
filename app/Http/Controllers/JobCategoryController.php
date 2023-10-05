@@ -18,4 +18,14 @@ class JobCategoryController extends Controller
     {
         return view('admin.job.add');
     }
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'jobcategory' => 'required|unique:jobCategory',
+            'status' => 'required',
+        ]);
+        $jobCategory = jobCategory::create($validatedData);
+        return back()->with('success', ' Job Category created successfully.');
+
+    }
 }

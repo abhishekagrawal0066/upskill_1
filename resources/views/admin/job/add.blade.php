@@ -24,8 +24,8 @@
                                 </div>
                                 <div>
                                     <label for="defaultFormControlInput" class="form-label">Job Category Name</label>
-                                    <input type="text" name="job_name" class="form-control" id="defaultFormControlInput" placeholder="job Category Name" aria-describedby="defaultFormControlHelp" >
-                                    @error('job_name')
+                                    <input type="text" name="jobcategory" class="form-control" id="defaultFormControlInput" placeholder="job Category Name" aria-describedby="defaultFormControlHelp" >
+                                    @error('jobcategory')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>

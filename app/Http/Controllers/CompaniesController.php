@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\jobCategory;
 use App\Models\Companies;
 use Illuminate\Http\Request;
+use App\Models\Country;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +24,9 @@ class CompaniesController extends Controller
      */
     public function create()
     {
-        return view('admin.companies.add');
+        $jobcategory = jobCategory::all();
+        $countries = Country::get(["name","id"]);
+        return view('admin.companies.add',compact('jobcategory','countries'));
     }
 
     /**
@@ -32,8 +35,16 @@ class CompaniesController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'jobcategory' => 'required', 
             'companies_name' => 'required|unique:companies',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'salary' => 'required',
+            'country' => 'required', 
+            'state' => 'required', 
+            'city' => 'required', 
+            'time' => 'required', 
+            'experience' => 'required',  
+            'description' => 'required', 
             'status' => 'required',
         ]);
         if ($image = $request->file('image')) {
@@ -76,10 +87,12 @@ class CompaniesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Companies $id)
+    public function edit($id)
     {
-        $Companies = Companies::find($id);
-        return view('admin.companies.edit')->with('companies',$Companies);
+        $companies = Companies::find($id);
+        $jobcategory = jobCategory::all();
+        $countries = Country::get(["name","id"]);
+        return view('admin.companies.edit',compact('companies','jobcategory','countries'));
     }
 
     /**
@@ -96,7 +109,15 @@ class CompaniesController extends Controller
         // $companies = Companies::find($id);
         // $id->update($validatedData->all());
         $validatedData = $request->validate([
+            'jobcategory' => 'required', 
             'companies_name' => 'required',
+            'salary' => 'required',
+            'country' => 'required', 
+            'state' => 'required', 
+            'city' => 'required', 
+            'time' => 'required', 
+            'experience' => 'required',  
+            'description' => 'required', 
             'status' => 'required',
         ]);
         $imageName = '';
@@ -109,7 +130,7 @@ class CompaniesController extends Controller
         } else {
             $imageName = $id->image;
         }
-        $postData = ['companies_name' => $request->companies_name,'image' => $imageName,'status' => $request->status];
+        $postData = ['jobcategory' => $request->jobcategory,'companies_name' => $request->companies_name,'image' => $imageName,'salary' => $request->salary,'country' => $request->country,'state' => $request->state,'city' => $request->city,'time' => $request->time,'experience' => $request->experience,'description' => $request->description,'status' => $request->status];
         $id->update($postData);
         return redirect()->route('companies.list')->with('success','Company name updated successfully');
     }

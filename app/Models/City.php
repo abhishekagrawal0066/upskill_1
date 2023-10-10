@@ -1,17 +1,20 @@
 <?php
-
+  
 namespace App\Models;
-
+  
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-class jobCategory extends Model
+   
+class City extends Model
 {
-    protected $table = 'jobcategory';
-
     use HasFactory;
+  
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
     protected $fillable = [
-        'jobcategory',
-        'status',
+        'name', 'state_id'
     ];
 }

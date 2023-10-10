@@ -7,6 +7,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AdminProfileControllar;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\JobCategoryController;
+use App\Http\Controllers\DropdownController;
 // use App\Http\Controllers\AdminAuth\LogoutController;
 
 
@@ -97,6 +98,16 @@ Route::patch('admin/profile', [AdminProfileControllar::class, 'update'])->name('
 
 Route::get('admin/dashboard', [EmployeeController::class, 'countemps']);
 
-Route::get('admin/user/list',[UserController::class, 'index'])->name('employee.list');
+Route::get('admin/user/list',[UserController::class, 'index'])->name('user.list');
+Route::delete('admin/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
+Route::post('admin/{user}/restore', [UserController::class,  'restore'])->name('users.restore');
+Route::delete('admin/user/force-delete', [UserController::class, 'forceDelete'])->name('users.force-delete');
+Route::post('admin/restore-all', [UserController::class,'restoreAll'])->name('users.restore-all');
 
+
+//Country State city 
+
+Route::get('country-state-city', [DropdownController::class, 'index']);
+Route::post('get-states-by-country', [DropdownController::class, 'fetchState']);
+Route::post('get-cities-by-state', [DropdownController::class, 'fetchCity']);
 

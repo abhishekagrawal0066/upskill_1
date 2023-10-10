@@ -9,8 +9,16 @@ class Companies extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'jobcategory',
         'companies_name',
         'image',
+        'salary',
+        'country',
+        'state',
+        'city',
+        'time',
+        'experience',
+        'description',
         'status',
     ];
 }

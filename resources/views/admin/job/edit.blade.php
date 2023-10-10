@@ -1,14 +1,14 @@
 @extends('admin.master')
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><a href="{{ url('admin/companies/list') }}" class="text-muted">Companies </a>/</span> Add Companies</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><a href="{{ url('admin/job/list') }}" class="text-muted">Companies </a>/</span> Add Companies</h4>
         <div class="col-md-12">
         <div class="row">
             <div class="card mb-4">
                     <div class="add-button p-2">
-                    <a href="{{ url('admin/companies/list') }}" class="add_category btn btn-primary float-end">Back</a>
+                    <a href="{{ url('admin/job/list') }}" class="add_category btn btn-primary float-end">Back</a>
                     </div>
-                    <form action="{{route('companies.update',$companies[0]->id)}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('job.update',$jobcategory->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div>
@@ -24,19 +24,8 @@
                                 </div>
                                 <div>
                                     <label for="defaultFormControlInput" class="form-label">Company Name</label>
-                                    <input type="text" name="companies_name" class="form-control" id="defaultFormControlInput" placeholder="Company Name" aria-describedby="defaultFormControlHelp" value={{ old('companies_name', $companies[0]->companies_name) }} >
-                                    @error('companies_name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <br>
-                                <div>
-                                    <label for="defaultFormControlInput1" class="form-label">Company image</label>
-                                    <input type="file" name="image" class="form-control" id="defaultFormControlInput1" accept="image/*" placeholder="Company image" aria-describedby="defaultFormControlHelp" >
-                                    <img src="{{ asset('storage/images/'.$companies[0]->image) }}" class="img-fluid img-thumbnail" width="150">
-
-
-                                    @error('image')
+                                    <input type="text" name="jobcategory" class="form-control" id="defaultFormControlInput" placeholder="Company Name" aria-describedby="defaultFormControlHelp" value={{ old('jobcategory', $jobcategory->jobcategory) }} >
+                                    @error('jobcategory')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -45,8 +34,8 @@
                                     <label for="defaultFormControlInput" class="form-label">Status</label>
                                     <select name="status" id="defaultFormControlInput" class="form-select">
                                         <option value="">Select Status</option>
-                                        <option value="1" {{ $companies[0]->status == 1 ? 'selected="selected"' : '' }}>Active</option>
-                                        <option value="0" {{ $companies[0]->status == 0 ? 'selected="selected"' : '' }}>Disabled</option>
+                                        <option value="1" {{ $jobcategory->status == 1 ? 'selected="selected"' : '' }}>Active</option>
+                                        <option value="0" {{ $jobcategory->status == 0 ? 'selected="selected"' : '' }}>Disabled</option>
                                     </select>
                                     @error('status')
                                     <span class="text-danger">{{ $message }}</span>

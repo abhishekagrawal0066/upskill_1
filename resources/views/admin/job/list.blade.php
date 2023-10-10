@@ -51,10 +51,10 @@
                                       <i class="bx bx-dots-vertical-rounded"></i>
                                   </button>
                                   <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="{{route('companies.edit',$row->id)}}"><i class="bx bx-edit-alt me-1"></i>
+                                      <a class="dropdown-item" href="{{route('job.edit',$row->id)}}"><i class="bx bx-edit-alt me-1"></i>
                                           Edit</a>
-                                      <a class="dropdown-item deleteRecord" href="{{route('companies.destroy',$row->id)}}" data-toggle="modal" data-confirm="Confirm delete?" id="smallButton" data-target="#smallModal" data-attr="" title="Delete Category Record"><i class="bx bx-trash me-1"></i>
-                                          Delete</a>
+                                        <a class="dropdown-item deleteRecord" href="{{route('job.destroy',$row->id)}}"  data-confirm="Confirm delete?" id="smallButton" data-target="#smallModal" data-attr="" title="Delete Category Record"><i class="bx bx-trash me-1"></i>
+                                            Delete</a>
                                   </div>
                               </div>
                           </td>

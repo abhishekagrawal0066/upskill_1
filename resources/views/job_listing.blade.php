@@ -211,22 +211,22 @@
                                 <div class="single-job-items mb-30">
                                     <div class="job-items">
                                         <div class="company-img">
-                                            <a href="#"><img src="assets/img/icon/job-list1.png" alt=""></a>
+                                            <a href="#"><img src="{{ asset('storage/images/'.$Company->image) }}" width="100" alt=""></a>
                                         </div>
                                         <div class="job-tittle job-tittle2">
                                             <a href="#">
-                                                <h4>Digital Marketer</h4>
+                                                <h4>{{$Company->jobcategory}}</h4>
                                             </a>
                                             <ul>
-                                                <li>Creative Agency</li>
+                                                <li>{{$Company->companies_name}}</li>
                                                 <li><i class="fas fa-map-marker-alt"></i>Athens, Greece</li>
-                                                <li>$3500 - $4000</li>
+                                                <li>Per Month Rs. {{$Company->salary}}</li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="items-link items-link2 f-right">
-                                        <a href="job_details.html">Full Time</a>
-                                        <span>7 hours ago</span>
+                                        <a href="job_details.html"> @if($Company->time == 'full_time') Full Time @else Part Time @endif</a>
+                                        {{-- <span> 7 hR TO</span> --}}
                                     </div>
                                 </div>
                             @endforeach

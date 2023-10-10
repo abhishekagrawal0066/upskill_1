@@ -24,4 +24,28 @@ class UserController extends Controller
 
     //     return response()->json(['success'=>'Status change successfully.']);
     // }
+    public function destroy(User $user) 
+    {
+        dd($user);
+        $user->delete();
+        return redirect()->route('user.list')->withSuccess(__('User deleted successfully.'));
+    }
+    
+    public function restore(User $user) 
+    {
+        dd($user->id);
+        User::where('id', $id)->withTrashed()->restore();
+        return redirect()->route('user.list', ['status' => 'archived'])->withSuccess(__('User restored successfully.'));
+    }
+    public function forceDelete($id) 
+    {
+        dd($id);
+        User::where('id', $id)->withTrashed()->forceDelete();
+        return redirect()->route('user.list', ['status' => 'archived'])->withSuccess(__('User force deleted successfully.'));
+    }
+    public function restoreAll() 
+    {
+        User::onlyTrashed()->restore();
+        return redirect()->route('user.list')->withSuccess(__('All users restored successfully.'));
+    }
 }

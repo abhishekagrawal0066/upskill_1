@@ -20,6 +20,19 @@
                  @endif
             </div>
             <table class="table table-striped table-bordered" id="example" width ="100%">
+                <div class="mt-2">
+        
+                    <br>
+                    <a href="user">All users</a> | <a href="/users?status=archived">Archived users</a>
+        
+                    <br><br>
+                    @if(request()->get('status') == 'archived')
+                        {!! Form::open(['method' => 'POST','route' => ['users.restore-all'],'style'=>'display:inline']) !!}
+                        {!! Form::submit('Restore All', ['class' => 'btn btn-primary btn-sm']) !!}
+                        {!! Form::close() !!}
+                    @endif
+                </div>
+        
                 <thead>
                     <tr>
                         <th>No</th>
@@ -57,12 +70,24 @@
                                       <i class="bx bx-dots-vertical-rounded"></i>
                                   </button>
                                   <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="{{route('employee.edit',$row->id)}}"><i class="bx bx-edit-alt me-1"></i>
-                                          Edit</a>
-                                      <a class="dropdown-item deleteRecord" href="{{route('employee.destroy',$row->id)}}" data-toggle="modal" data-confirm="Confirm delete?" id="smallButton" data-target="#smallModal" data-attr="" title="Delete Category Record"><i class="bx bx-trash me-1"></i>
+                                    {{-- <a class="dropdown-item" href="{{route('users.edit',$row->id)}}"><i class="bx bx-edit-alt me-1"></i>
+                                          Edit</a> --}}
+                                    <a class="dropdown-item" href="{{route('users.force-delete',$row->id)}}"><i class="bx bx-edit-alt me-1"></i>
+                                            Soft Delete</a>
+                                      <a class="dropdown-item deleteRecord" href="{{route('users.destroy',$row->id)}}" data-confirm="Confirm delete?" id="smallButton" data-target="#smallModal" data-attr="" title="Delete Category Record"><i class="bx bx-trash me-1"></i>
                                           Delete</a>
                                   </div>
+                                
                               </div>
+                              @if(request()->get('status') == 'archived')
+                              {!! Form::open(['method' => 'POST','route' => ['users.restore', $row->id],'style'=>'display:inline']) !!}
+                              {!! Form::submit('Restore', ['class' => 'btn btn-primary btn-sm']) !!}
+                              {!! Form::close() !!}
+                          @else
+                              {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $row->id],'style'=>'display:inline']) !!}
+                              {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                              {!! Form::close() !!}
+                          @endif
                           </td>
                       </tr>
                     @endforeach

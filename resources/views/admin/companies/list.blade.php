@@ -23,11 +23,13 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Job Category</th>
                         <th>Companies Name</th>
                         <th>Companies Image</th>
+                        <th>Experience</th>
                         <th>Create Date</th>
                         <td>Update Date</td>
-                        <th width="11%">Status</th>
+                        <th width="">Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -37,14 +39,16 @@
                     <div style="display: none">{{ $no++}}</div>
                       <tr>
                           <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{$no; }}</strong></td>
+                          <td>{{ $row->jobcategory }}</td>
                           <td>{{ $row->companies_name }}</td>
                           <td> <img src="{{ asset('storage/images/'.$row->image) }}" class="" width="100" height="50"></td>
+                          <td>{{ $row->experience }} Year</td>
                           <td>{{ $row->created_at }}</td>
                           <td>{{ $row->updated_at }}</td>
                           <td class="custom-control custom-switch" style="text-align: right">
                             {{-- <input data-id="{{$row->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="0" {{ $row->status ? 'checked' : '' }}> --}}
                             <input data-id="{{$row->id}}" type="checkbox" class="custom-control-input toggle-class" id="customSwitches{{$row->id}}" {{ $row->status ? 'checked' : '' }}>
-                            <label class="custom-control-label" for="customSwitches{{$row->id}}">{{ $row->status == 1 ? "Active" : "Disable"}}</label>
+                            <label class="custom-control-label" for="customSwitches{{$row->id}}"></label>
                          </td>
 
                           <td>
@@ -55,7 +59,7 @@
                                   <div class="dropdown-menu">
                                       <a class="dropdown-item" href="{{route('companies.edit',$row->id)}}"><i class="bx bx-edit-alt me-1"></i>
                                           Edit</a>
-                                      <a class="dropdown-item deleteRecord" href="{{route('companies.destroy',$row->id)}}" data-toggle="modal" data-confirm="Confirm delete?" id="smallButton" data-target="#smallModal" data-attr="" title="Delete Category Record"><i class="bx bx-trash me-1"></i>
+                                      <a class="dropdown-item deleteRecord" href="{{route('companies.destroy',$row->id)}}" data-confirm="Confirm delete?" id="smallButton" data-target="#smallModal" data-attr="" title="Delete Category Record"><i class="bx bx-trash me-1"></i>
                                           Delete</a>
                                   </div>
                               </div>

@@ -8,7 +8,7 @@
                     <div class="add-button p-2">
                     <a href="{{ url('admin/companies/list') }}" class="add_category btn btn-primary float-end">Back</a>
                     </div>
-                    <form action="{{route('companies.update',$companies[0]->id)}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('companies.update',$companies->id)}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div>
@@ -23,8 +23,22 @@
                                  @endif
                                 </div>
                                 <div>
+                                    <label for="defaultFormControlInput" class="form-label">Select Job Category</label>
+                                    <select name="jobcategory" id="defaultFormControlInputq" class="form-select">
+                                        <option value="">Select Job Category</option>
+                                        @foreach ($jobcategory as $row)
+                                            <option value="{{ $row->jobcategory }}" {{ ( $row->jobcategory == $companies->jobcategory) ? 'selected' : '' }}>{{$row->jobcategory}}</option>
+                                
+                                        @endforeach
+                                    </select>
+                                    @error('jobcategory')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <br>
+                                <div>
                                     <label for="defaultFormControlInput" class="form-label">Company Name</label>
-                                    <input type="text" name="companies_name" class="form-control" id="defaultFormControlInput" placeholder="Company Name" aria-describedby="defaultFormControlHelp" value={{ old('companies_name', $companies[0]->companies_name) }} >
+                                    <input type="text" name="companies_name" class="form-control" id="defaultFormControlInput" placeholder="Company Name" aria-describedby="defaultFormControlHelp" value={{ old('companies_name', $companies->companies_name) }} >
                                     @error('companies_name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -33,7 +47,7 @@
                                 <div>
                                     <label for="defaultFormControlInput1" class="form-label">Company image</label>
                                     <input type="file" name="image" class="form-control" id="defaultFormControlInput1" accept="image/*" placeholder="Company image" aria-describedby="defaultFormControlHelp" >
-                                    <img src="{{ asset('storage/images/'.$companies[0]->image) }}" class="img-fluid img-thumbnail" width="150">
+                                    <img src="{{ asset('storage/images/'.$companies->image) }}" class="img-fluid img-thumbnail" width="150">
 
 
                                     @error('image')
@@ -42,11 +56,88 @@
                                 </div>
                                 <br>
                                 <div>
+                                    <label for="defaultFormControlInput" class="form-label">Select Work period</label>
+                                    <select name="time" id="defaultFormControlInput" class="form-select">
+                                            <option value="">Select Work Period</option>
+                                            <option value="full_time"  {{old('time',$companies->time)=="full_time"? 'selected':''}}>Full Time</option>
+                                            <option value="part_time" {{old('time',$companies->time)=="part_time"? 'selected':''}}>Part Time</option>
+                                    </select>
+                                    @error('time')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div>
+                                    <label for="country-dropdown" class="form-label">Select Country</label>
+                                    <select name="country" id="country-dropdown" class="form-select">
+                                        <option value="">Select Country</option>
+                                        @foreach ($countries as $country) 
+                                        <option value="{{$country->id}}" {{( $country->id == $companies->country) ? 'selected' : '' }}>
+                                         {{$country->name}}
+                                         @endforeach
+                                        </option>
+                                    </select>
+                                    @error('country')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <br>
+                                <div>
+                                    <label for="state-dropdown" class="form-label">Select State</label>
+                                    <select name="state" id="state-dropdown" class="form-select">
+                                    </select>
+                                    @error('state')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <br>
+                                <div>
+                                    <label for="city-dropdown" class="form-label">Select City</label>
+                                    <select name="city" id="city-dropdown" class="form-select">
+                                        {{-- <option value="">Select City</option> --}}
+                                    </select>
+                                    @error('city')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                
+                                <br>
+                                <div>
+                                    <label for="defaultFormControlInput7" class="form-label">Salary Motnly</label>
+                                    <input type="text" name="salary" value="{{ old('salary', $companies->salary)}}" class="form-control" id="defaultFormControlInput7" placeholder="salary" aria-describedby="defaultFormControlHelp" >
+                                    @error('salary')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <br>
+                                <div>
+                                    <label for="defaultFormControlInput" class="form-label">Select Experience Employe</label>
+                                    <select name="experience" id="defaultFormControlInput" class="form-select">
+                                            <option value="">Select Experience</option>
+                                            <option value="1" {{old('time',$companies->experience)=="1"? 'selected':''}}>1 Year</option>
+                                            <option value="2" {{old('time',$companies->experience)=="2"? 'selected':''}}>2 Year</option>
+                                            <option value="3" {{old('time',$companies->experience)=="3"? 'selected':''}}>3 Year</option>
+                                            <option value="4" {{old('time',$companies->experience)=="4"? 'selected':''}}>4 year</option>
+                                            <option value="5" {{old('time',$companies->experience)=="5"? 'selected':''}}>5 Year</option>
+                                    </select>
+                                    @error('experience')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Companies Description</label>
+                                    <textarea class="form-control" name="description" value="" id="exampleFormControlTextarea1" rows="3">{{ old('description', $companies->description)}}</textarea>
+                                    @error('description')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <br>
+                                <div>
                                     <label for="defaultFormControlInput" class="form-label">Status</label>
                                     <select name="status" id="defaultFormControlInput" class="form-select">
                                         <option value="">Select Status</option>
-                                        <option value="1" {{ $companies[0]->status == 1 ? 'selected="selected"' : '' }}>Active</option>
-                                        <option value="0" {{ $companies[0]->status == 0 ? 'selected="selected"' : '' }}>Disabled</option>
+                                        <option value="1" {{ $companies->status == 1 ? 'selected="selected"' : '' }}>Active</option>
+                                        <option value="0" {{ $companies->status == 0 ? 'selected="selected"' : '' }}>Disabled</option>
                                     </select>
                                     @error('status')
                                     <span class="text-danger">{{ $message }}</span>
@@ -62,4 +153,53 @@
             </div>
         </div>
     </div>
+    <script>
+ 
+        $(document).ready(function() {
+         
+            $('#country-dropdown').on('change', function() {
+                    var country_id = this.value;
+                    $("#state-dropdown").html('');
+                    $.ajax({
+                        url:"{{url('get-states-by-country')}}",
+                        type: "POST",
+                        data: {
+                            country_id: country_id,
+                            _token: '{{csrf_token()}}' 
+                        },
+                        dataType : 'json',
+                        success: function(result){
+                            $('#state-dropdown').html('<option value="">Select State</option>'); 
+                            $.each(result.states,function(key,value){
+                            $("#state-dropdown").append('<option value="'+value.id+'">'+value.name+'</option>');
+                            });
+                            $('#city-dropdown').html('<option value="">Select State First</option>'); 
+                        }
+                    });
+            });    
+         
+            $('#state-dropdown').on('change', function() {
+                    var state_id = this.value;
+                    $("#city-dropdown").html('');
+                    $.ajax({
+                        url:"{{url('get-cities-by-state')}}",
+                        type: "POST",
+                        data: {
+                            state_id: state_id,
+                             _token: '{{csrf_token()}}' 
+                        },
+                        dataType : 'json',
+                        success: function(result){
+                            $('#city-dropdown').html('<option value="">Select City</option>'); 
+                            $.each(result.cities,function(key,value){
+                            $("#city-dropdown").append('<option value="'+value.id+'">'+value.name+'</option>');
+                            });
+         
+                        }
+                    });
+                 
+                 
+            });
+        });
+        </script>
 @endsection

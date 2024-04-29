@@ -94,15 +94,17 @@
                           <li>Salary :  <span>Rs. {{$companies->salary}} Monthly</span></li>
                           <li>Application date : <span>{{ $companies->created_at->format('d-M-Y')}}</span></li>
                       </ul>
-                      @if (Auth::guest())
+                    @if (Auth::guest())
+                    <div class="apply-btn2">
+                        <a href="{{ route('login') }}" class="btn">Apply Now</a>
+                    </div>
+                    @else
                         <div class="apply-btn2">
-                            <a href="#" class="btn">Apply Now</a>
+                            {{Session::put('variableName', $companies);}}
+                            {{-- <a  onclick="window.location='route('home')'" >Apply Now</a> --}}
+                            <a type="button" href="{{ route('contact') }}" class="btn">Apply Now</a>
                         </div>
-                       @else
-                        <div class="apply-btn2">
-                            <a href="{{ route('login') }}" class="btn">Apply Now</a>
-                        </div>
-                       @endif
+                    @endif
                       {{-- @if (Auth::guest())
                       @endif --}}
                    </div>

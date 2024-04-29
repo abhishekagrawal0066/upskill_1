@@ -63,7 +63,7 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                        <a class="dropdown-item" href="{{ url('admin/employee/list') }}">View More</a>
+                                        <a class="dropdown-item" href="{{ url('productlist') }}">View More</a>
                                     </div>
                                 </div>
                             </div>

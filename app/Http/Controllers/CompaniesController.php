@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\jobCategory;
 use App\Models\Companies;
+use App\Models\apllyJobsList;
 use Illuminate\Http\Request;
 use App\Models\Country;
 use Illuminate\Support\Facades\Storage;
@@ -165,5 +166,31 @@ class CompaniesController extends Controller
         $companies = Companies::find($id);
         // $Companies = Companies::all();
         return view('job_details', compact('companies'));
+    }
+    public function contacts()
+    {
+        // $companies = Companies::find($id);
+        // $Companies = Companies::all();
+        return view('/contact');
+    }
+    public function jobDetailsStore(Request $request)
+    {
+        $request->userid;
+        $request->companyid; 
+        $request->name; 
+        $request->email; 
+        $request->language;
+        $request->companies_name;
+        $request->experience;
+        $request->message;
+        // dd($request);
+        // $article = Article::create($request->all());
+
+        $companies = apllyJobsList::create($request->all());
+        return back()->with('success', 'Company name created successfully.');  
+        
+        // $companies = Companies::find($id);
+        // // $Companies = Companies::all();
+        // return view('job_details', compact('companies'));
     }
 }

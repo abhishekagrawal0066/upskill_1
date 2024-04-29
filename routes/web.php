@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminProfileControllar;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\JobCategoryController;
 use App\Http\Controllers\DropdownController;
+use App\Http\Controllers\LogoutController;
 // use App\Http\Controllers\AdminAuth\LogoutController;
 
 
@@ -22,13 +23,14 @@ use App\Http\Controllers\DropdownController;
 |
 */
 
-Route::get('/', function () {return view('welcome');
+Route::get('/home', function () {return view('welcome');
 })->name('home');
 Route::get('/job_listing', function () {return view('job_listing');
 })->name('job_listing');
 // Route::get('/job_details',[CompaniesController::class, 'jobDetails'])->name('job_details');
 Route::any('job_details/{id}',[CompaniesController::class, 'jobDetails'])->name('job_details');
-
+Route::get('/contact', [CompaniesController::class, 'contacts'])->name('contact');
+Route::post('/contact', [CompaniesController::class, 'jobDetailsStore']);
 
 // //google login
 // Route::get('login/google', [App\Http\Controllers\Auth\ProviderController::class, 'redirectToGoogle'])->name('login.google');
@@ -44,9 +46,7 @@ Route::get('login/{provider}/callback',  [ProviderController::class, 'callback']
 // Route::get('login/github', [App\Http\Controllers\Auth\ProviderController::class, 'redirectToGithub'])->name('login.github');
 // Route::get('login/github/callback',  [App\Http\Controllers\Auth\ProviderController::class, 'handleGithubCallback']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -115,3 +115,14 @@ Route::get('country-state-city', [DropdownController::class, 'index']);
 Route::post('get-states-by-country', [DropdownController::class, 'fetchState']);
 Route::post('get-cities-by-state', [DropdownController::class, 'fetchCity']);
 
+
+// Route::group(['middleware' => ['auth']], function() {
+//     /**
+//     * Logout Route
+//     */
+    // Route::get('/logout', 'ProviderController@perform')->name('logout');
+    // Route::get('/logout', 'LogoutController@perform')->name('logout');
+    Route::get('/logout', [LogoutController::class, 'perform'])->name('logout');
+
+
+//  });

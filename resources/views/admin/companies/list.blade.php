@@ -1,11 +1,11 @@
 @extends('admin.master')
 @section('content')
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><a href="{{ url('admin/companies/list') }}" class="text-muted">Companies </a> /</span> Companies List</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"><a href="{{ url('productlist') }}" class="text-muted">Products </a> /</span> Products List</h4>
 
     <!-- Basic Bootstrap Table -->
     <div class="card">
         <div class="add-button p-2">
-            <a href="{{ url('admin/companies/add') }}" class="add_category btn btn-primary float-end">Add</a>
+            <a href="{{ url('productadd') }}" class="add_category btn btn-primary float-end">Edit</a>
         </div>
         <div class="table-responsive text-nowrap p-2">
             <div x-data="{ showMessage: true }" x-show="showMessage" x-init="setTimeout(() => showMessage = false, 2000)">
@@ -19,7 +19,7 @@
                     
                  @endif
             </div>
-            <table class="table table-striped table-bordered" id="example" width="100%">
+            <table id="example" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
                         <th>No</th>

@@ -27,17 +27,29 @@
                                                 <li><a href="job_details.html">job Details</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="{{route('contact')}}">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>          
-                            <!-- Header-btn -->
-                            @if (Route::has('login'))
+                            @if (Auth::guest())
                             <div class="header-btn d-none f-right d-lg-block">
                                 <a href="{{route('login') }}" class="btn head-btn1">Login</a>
                                 <a href="{{ route('register') }}" class="btn head-btn2">Register</a>
                             </div>
+                            @else
+                            {{ Auth::user()->name }}
+                            <div class="header-btn d-none f-right d-lg-block">
+                                <a href="{{ route('logout') }}" class="btn head-btn3">Logout</a>
+                            </div>
                             @endif
+                            <!-- Header-btn -->
+                            {{-- @if (Route::has('login'))
+                            <div class="header-btn d-none f-right d-lg-block">
+                                <a href="{{route('login') }}" class="btn head-btn1">Register</a>
+                                <a href="{{ route('register') }}" class="btn head-btn2">Login </a>
+                            </div>
+                            @endif --}}
+                            
                             {{-- @if (Route::has('login'))
                             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                                 @auth

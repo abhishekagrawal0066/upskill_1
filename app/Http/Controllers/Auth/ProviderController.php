@@ -8,6 +8,7 @@ use App\Models\User;
 use Hash;
 use Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ProviderController extends Controller
 {
@@ -44,7 +45,7 @@ class ProviderController extends Controller
                 ]);
             }
             Auth::login($user);
-            return redirect()->route('/dashboard');
+            return redirect()->route('/home');
         } catch (\Exception $e){
             return redirect('/login');
         }

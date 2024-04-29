@@ -4,7 +4,17 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
+    @if (Auth::guest())
+    {{-- <div class="apply-btn2">
+        <a href="wqeweq" class="btn">Apply Now</a>
+    </div> --}}
+sdadasasasa
+    @else
+    {{-- <div class="apply-btn2">
+        <a href="{{ route('login') }}" class="btn">Apply Now</a>
+    </div> --}}
+    sdasda
+   @endif
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">

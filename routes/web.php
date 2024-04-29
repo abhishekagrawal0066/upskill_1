@@ -26,6 +26,10 @@ Route::get('/', function () {return view('welcome');
 })->name('home');
 Route::get('/job_listing', function () {return view('job_listing');
 })->name('job_listing');
+// Route::get('/job_details',[CompaniesController::class, 'jobDetails'])->name('job_details');
+Route::any('job_details/{id}',[CompaniesController::class, 'jobDetails'])->name('job_details');
+
+
 // //google login
 // Route::get('login/google', [App\Http\Controllers\Auth\ProviderController::class, 'redirectToGoogle'])->name('login.google');
 // Route::get('login/google/callback',  [App\Http\Controllers\Auth\ProviderController::class, 'handleGoogleCallback']);
@@ -101,8 +105,8 @@ Route::get('admin/dashboard', [EmployeeController::class, 'countemps']);
 Route::get('admin/user/list',[UserController::class, 'index'])->name('user.list');
 Route::delete('admin/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
 Route::post('admin/{user}/restore', [UserController::class,  'restore'])->name('users.restore');
-Route::delete('admin/user/force-delete', [UserController::class, 'forceDelete'])->name('users.force-delete');
-Route::post('admin/restore-all', [UserController::class,'restoreAll'])->name('users.restore-all');
+Route::delete('admin/user/list', [UserController::class, 'forceDelete'])->name('users.force-delete');
+Route::post('admin/{user}/list', [UserController::class,'restoreAll'])->name('users.restore-all');
 
 
 //Country State city 

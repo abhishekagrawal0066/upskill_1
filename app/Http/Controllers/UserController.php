@@ -9,6 +9,8 @@ class UserController extends Controller
 {
     public function index()
     {
+        // $userAll = User::latest();
+        // dd($users);
         $userAll = User::all();
         return view('admin.user.list',compact('userAll'));
     }
@@ -26,20 +28,18 @@ class UserController extends Controller
     // }
     public function destroy(User $user) 
     {
-        dd($user);
         $user->delete();
         return redirect()->route('user.list')->withSuccess(__('User deleted successfully.'));
     }
     
-    public function restore(User $user) 
+    public function restore($id) 
     {
-        dd($user->id);
+        dd($id);
         User::where('id', $id)->withTrashed()->restore();
         return redirect()->route('user.list', ['status' => 'archived'])->withSuccess(__('User restored successfully.'));
     }
     public function forceDelete($id) 
     {
-        dd($id);
         User::where('id', $id)->withTrashed()->forceDelete();
         return redirect()->route('user.list', ['status' => 'archived'])->withSuccess(__('User force deleted successfully.'));
     }

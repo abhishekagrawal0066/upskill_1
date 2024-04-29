@@ -225,7 +225,7 @@
                                         </div>
                                     </div>
                                     <div class="items-link items-link2 f-right">
-                                        <a href="job_details.html"> @if($Company->time == 'full_time') Full Time @else Part Time @endif</a>
+                                        <a href="{{route('job_details',$Company->id)}}"> @if($Company->time == 'full_time') Full Time @else Part Time @endif</a>
                                         {{-- <span> 7 hR TO</span> --}}
                                     </div>
                                 </div>

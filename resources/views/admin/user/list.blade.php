@@ -21,17 +21,17 @@
             </div>
             <table class="table table-striped table-bordered" id="example" width ="100%">
                 <div class="mt-2">
-        
                     <br>
-                    <a href="user">All users</a> | <a href="/users?status=archived">Archived users</a>
-        
+                    <a href="restore-all">All users</a> | <a href="status=archived">Archived users</a>
+
                     <br><br>
-                    @if(request()->get('status') == 'archived')
+                    {{-- @if(request()->get('status') == 'archived') --}}
                         {!! Form::open(['method' => 'POST','route' => ['users.restore-all'],'style'=>'display:inline']) !!}
                         {!! Form::submit('Restore All', ['class' => 'btn btn-primary btn-sm']) !!}
                         {!! Form::close() !!}
-                    @endif
+                    {{-- @endif --}}
                 </div>
+                <br>
         
                 <thead>
                     <tr>
@@ -73,21 +73,21 @@
                                     {{-- <a class="dropdown-item" href="{{route('users.edit',$row->id)}}"><i class="bx bx-edit-alt me-1"></i>
                                           Edit</a> --}}
                                     <a class="dropdown-item" href="{{route('users.force-delete',$row->id)}}"><i class="bx bx-edit-alt me-1"></i>
-                                            Soft Delete</a>
+                                        Force Delete</a>
                                       <a class="dropdown-item deleteRecord" href="{{route('users.destroy',$row->id)}}" data-confirm="Confirm delete?" id="smallButton" data-target="#smallModal" data-attr="" title="Delete Category Record"><i class="bx bx-trash me-1"></i>
                                           Delete</a>
                                   </div>
                                 
                               </div>
-                              @if(request()->get('status') == 'archived')
+                            {{-- @if(request()->get('status') == 'archived') --}}
                               {!! Form::open(['method' => 'POST','route' => ['users.restore', $row->id],'style'=>'display:inline']) !!}
                               {!! Form::submit('Restore', ['class' => 'btn btn-primary btn-sm']) !!}
                               {!! Form::close() !!}
-                          @else
+                          {{-- @else --}}
                               {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $row->id],'style'=>'display:inline']) !!}
                               {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
                               {!! Form::close() !!}
-                          @endif
+                          {{-- @endif --}}
                           </td>
                       </tr>
                     @endforeach

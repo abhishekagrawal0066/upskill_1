@@ -160,4 +160,10 @@ class CompaniesController extends Controller
         $count = DB::table('companies')->count();
         return view('job_listing', compact('Companies','count'));
     }
+    public function jobDetails($id)
+    {
+        $companies = Companies::find($id);
+        // $Companies = Companies::all();
+        return view('job_details', compact('companies'));
+    }
 }

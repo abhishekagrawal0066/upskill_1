@@ -106,7 +106,7 @@ Route::get('admin/user/list',[UserController::class, 'index'])->name('user.list'
 Route::delete('admin/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
 Route::post('admin/{user}/restore', [UserController::class,  'restore'])->name('users.restore');
 Route::delete('admin/user/list', [UserController::class, 'forceDelete'])->name('users.force-delete');
-Route::post('admin/{user}/list', [UserController::class,'restoreAll'])->name('users.restore-all');
+Route::post('admin/user/list', [UserController::class,'restoreAll'])->name('users.restore-all');
 
 
 //Country State city 

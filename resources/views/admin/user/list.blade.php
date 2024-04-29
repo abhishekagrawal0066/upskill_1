@@ -26,7 +26,9 @@
 
                     <br><br>
                     {{-- @if(request()->get('status') == 'archived') --}}
-                        {!! Form::open(['method' => 'POST','route' => ['users.restore-all'],'style'=>'display:inline']) !!}
+                        {{-- {!! Form::open(['method' => 'POST','route' => ['users.restore-all'],'style'=>'display:inline']) !!} --}}
+                        {!! Form::open(['method' => 'POST', 'url' => route('users.restore-all'), 'style' => 'display:inline']) !!}
+
                         {!! Form::submit('Restore All', ['class' => 'btn btn-primary btn-sm']) !!}
                         {!! Form::close() !!}
                     {{-- @endif --}}
